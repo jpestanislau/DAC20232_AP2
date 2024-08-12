@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>AP2</title>
+</h:head>
+
+<h:body>
+	<h:form id="formulario">
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:toolbar>
+			<p:toolbarGroup>
+				<p:link outcome="listagem" value="Listagem" />
+			</p:toolbarGroup>
+			<p:toolbarGroup>
+				<p:link outcome="resumo" value="Resumo" />
+			</p:toolbarGroup>
+			<p:toolbarGroup>
+				<p:link outcome="filtro" value="Filtro" />
+			</p:toolbarGroup>
+		</p:toolbar>
+
+		<p:panel header="Cadastro de Jogo">
+			<p:panelGrid columns="4">
+				<p:outputLabel value="Time 1: " for="seletorTime1" />
+				<h:selectOneMenu id="seletorTime1" value="#{jogoBean.seletorTime1}"
+					required="true" label="Time 1">
+					<f:selectItem itemLabel="Selecione Um" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItem itemLabel="A" itemValue="A" />
+					<f:selectItem itemLabel="B" itemValue="B" />
+					<f:selectItem itemLabel="C" itemValue="C" />
+				</h:selectOneMenu>
+
+				<p:outputLabel value="Gols do Time 1: " for="golsTime1" />
+				<p:inputText value="#{jogoBean.jogo.golsTime1}" id="golsTime1" />
+
+				<p:outputLabel value="Time 2: " for="seletorTime2" />
+				<h:selectOneMenu id="seletorTime2" value="#{jogoBean.seletorTime2}"
+					required="true" label="Time 2">
+					<f:selectItem itemLabel="Selecione Um" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItem itemLabel="A" itemValue="A" />
+					<f:selectItem itemLabel="B" itemValue="B" />
+					<f:selectItem itemLabel="C" itemValue="C" />
+				</h:selectOneMenu>
+
+				<p:outputLabel value="Gols do Time 2: " for="golsTime2" />
+				<p:inputText value="#{jogoBean.jogo.golsTime2}" id="golsTime2" />
+
+				<p:outputLabel value="Data da partida: " for="data" />
+				<p:datePicker id="data" value="#{jogoBean.jogo.dataPartida}"
+					showIcon="true" />
+
+
+				<p:commandButton value="Salvar" action="#{jogoBean.salvar}"
+					update="formulario" />
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>AP2</title>
+</h:head>
+
+<h:body>
+	<h:form id="formulario">
+
+		<p:toolbar>
+			<p:toolbarGroup>
+				<p:link outcome="index" value="Cadastro" />
+			</p:toolbarGroup>
+			<p:toolbarGroup>
+				<p:link outcome="listagem" value="Listagem" />
+			</p:toolbarGroup>
+			<p:toolbarGroup>
+				<p:link outcome="filtro" value="Filtro" />
+			</p:toolbarGroup>
+		</p:toolbar>
+
+		<div class="card">
+			<p:dataTable id="times" var="time" value="#{timeBean.listaDeJogos}">
+
+				<p:column headerText="Nome do Time">
+					<h:outputText value="#{time.nomeTime}" />
+				</p:column>
+
+				<p:column headerText="Pontuação">
+					<h:outputText value="#{time.pontuacao}" />
+				</p:column>
+
+				<p:column headerText="Nº Vitóras">
+					<h:outputText value="#{time.numVitorias}" />
+				</p:column>
+
+				<p:column headerText="Nº Derrotas">
+					<h:outputText value="#{time.numDerrotas}" />
+				</p:column>
+
+				<p:column headerText="Nº Empates">
+					<h:outputText value="#{time.numEmpates}" />
+				</p:column>
+
+				<p:column headerText="Gols Marcados">
+					<h:outputText value="#{time.golsMarcados}" />
+				</p:column>
+
+				<p:column headerText="Gols Sofridos">
+					<h:outputText value="#{time.golsSofridos}" />
+				</p:column>
+
+				<p:column headerText="Saldo de Gols">
+					<h:outputText value="#{time.saldosGols}" />
+				</p:column>
+
+			</p:dataTable>
+		</div>
+	</h:form>
+</h:body>
+</html>

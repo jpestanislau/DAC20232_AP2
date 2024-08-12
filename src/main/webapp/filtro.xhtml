@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>AP2</title>
+</h:head>
+
+<h:body>
+	<h:form id="formulario">
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:toolbar>
+			<p:toolbarGroup>
+				<p:link outcome="index" value="Cadastro" />
+			</p:toolbarGroup>
+			<p:toolbarGroup>
+				<p:link outcome="resumo" value="Resumo" />
+			</p:toolbarGroup>
+			<p:toolbarGroup>
+				<p:link outcome="listagem" value="Listagem" />
+			</p:toolbarGroup>
+		</p:toolbar>
+
+		<div>
+			<p:outputLabel value="Time: " for="seletorTimeFiltro" />
+			<h:selectOneMenu id="seletorTimeFiltro"
+				value="#{jogoBean.seletorTimeFiltro}" required="true" label="Time">
+				<f:selectItem itemLabel="Selecione Um" itemValue=""
+					noSelectionOption="true" />
+				<f:selectItem itemLabel="A" itemValue="A" />
+				<f:selectItem itemLabel="B" itemValue="B" />
+				<f:selectItem itemLabel="C" itemValue="C" />
+			</h:selectOneMenu>
+			<p:commandButton value="Filtar" action="#{jogoBean.filtrar}" update="formulario" />
+		</div>
+		<div class="card">
+
+			<p:dataTable id="jogos" var="jogo" value="#{jogoBean.listaDeJogosFiltrado}">
+
+				<p:column headerText="ID">
+					<h:outputText value="#{jogo.id}" />
+				</p:column>
+
+				<p:column headerText="Time 1">
+					<h:outputText value="#{jogo.getListaDeTimes()[0].nomeTime}" />
+				</p:column>
+
+				<p:column headerText="Gols do Time 1">
+					<h:outputText value="#{jogo.golsTime1}" />
+				</p:column>
+
+				<p:column headerText="Gols do Time 2">
+					<h:outputText value="#{jogo.golsTime2}" />
+				</p:column>
+
+				<p:column headerText="Time 2">
+					<h:outputText value="#{jogo.getListaDeTimes()[1].nomeTime}" />
+				</p:column>
+
+				<p:column headerText="Data da Partida">
+					<h:outputText value="#{jogo.dataPartida}" />
+				</p:column>
+
+				<p:column headerText="Data do Cadastro">
+					<h:outputText value="#{jogo.dataCadastro}" />
+				</p:column>
+				
+			</p:dataTable>
+		</div>
+	</h:form>
+</h:body>
+</html>

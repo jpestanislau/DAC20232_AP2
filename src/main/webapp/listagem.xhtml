@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>AP2</title>
+</h:head>
+
+<h:body>
+	<h:form id="formulario">
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:toolbar>
+			<p:toolbarGroup>
+				<p:link outcome="index" value="Cadastro" />
+			</p:toolbarGroup>
+			<p:toolbarGroup>
+				<p:link outcome="resumo" value="Resumo" />
+			</p:toolbarGroup>
+			<p:toolbarGroup>
+				<p:link outcome="filtro" value="Filtro" />
+			</p:toolbarGroup>
+		</p:toolbar>
+
+		<div class="card">
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:dataTable id="jogos" var="jogo" value="#{jogoBean.listaDeJogos}"
+				editable="true">
+
+				<p:ajax event="rowEdit" listener="#{jogoBean.onRowEdit}"
+					update=":formulario:msgs" />
+				<p:ajax event="rowEditCancel" listener="#{jogoBean.onRowCancel}"
+					update=":formulario:msgs" />
+
+				<p:column headerText="ID">
+					<h:outputText value="#{jogo.id}" />
+				</p:column>
+
+				<p:column headerText="Time 1">
+					<h:outputText value="#{jogo.getListaDeTimes()[0].nomeTime}" />
+				</p:column>
+
+				<p:column headerText="Gols do Time 1">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{jogo.golsTime1}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="modelInput"
+								value="#{jogoBean.golsTime1AuxEdicao}" style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Gols do Time 2">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{jogo.golsTime2}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="modelInput2"
+								value="#{jogoBean.golsTime2AuxEdicao}" style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Time 2">
+					<h:outputText value="#{jogo.getListaDeTimes()[1].nomeTime}" />
+				</p:column>
+
+				<p:column headerText="Data da Partida">
+					<h:outputText value="#{jogo.dataPartida}" />
+				</p:column>
+
+				<p:column headerText="Data do Cadastro">
+					<h:outputText value="#{jogo.dataCadastro}" />
+				</p:column>
+
+				<p:column style="width:6rem">
+					<p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit"
+						saveTitle="Save Row" />
+				</p:column>
+
+				<p:column headerText="Excluir">
+					<p:commandButton value="Excluir" action="#{jogoBean.excluir(jogo)}"
+						update="formulario" />
+				</p:column>
+
+
+			</p:dataTable>
+		</div>
+	</h:form>
+</h:body>
+</html>
